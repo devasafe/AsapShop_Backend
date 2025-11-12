@@ -108,7 +108,7 @@ app.use((err, req, res, next) => {
 
 // Iniciar servidor
 app.listen(port, () => {
-  console.log(`✅ Backend rodando em http://localhost:${port}`);
+  console.log(`✅ Backend no ar`);
   console.log(`📁 Imagens em: ${uploadDir}`);
 });
 
