@@ -18,9 +18,7 @@ router.post('/upload-multiple', upload.array('product_images'), (req, res) => {
     return res.status(400).json({ success: 0, error: 'Nenhuma imagem recebida' });
   }
 
-  const port = process.env.PORT || 4000;
-  // ✅ SEMPRE FORÇA HTTP
-  const host = `http://localhost:${port}`;
+  const host = process.env.BACKEND_PUBLIC_URL || `http://localhost:4000`;
   const urls = req.files.map(file => `${host}/images/${file.filename}`);
 
   console.log('✅ Imagens salvas:', urls);
