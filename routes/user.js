@@ -61,7 +61,7 @@ router.post('/signup', async (req, res) => {
         name: username,
         email: emailNorm,
         password: hashed,
-        image: image || 'http://localhost:4000/images/default.png',
+  image: image || 'https://asapshop-backend.onrender.com/images/default.png',
         code,
         expiresAt
       });
@@ -119,6 +119,7 @@ router.post('/confirm', async (req, res) => {
       email: pending.email,
       password: pending.password,
       image: pending.image || 'http://localhost:4000/images/default.png',
+  image: pending.image || 'https://asapshop-backend.onrender.com/images/default.png',
       cartData: {},
       isAdmin: false
     });
@@ -190,7 +191,7 @@ router.post('/login', async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        image: user.image || 'http://localhost:4000/images/default.png'
+    image: user.image || 'https://asapshop-backend.onrender.com/images/default.png'
       }
     });
   } catch (err) {
@@ -210,6 +211,7 @@ router.post('/getuser', fetchUser, async (req, res) => {
         name: user.name,
         email: user.email,
         image: user.image || 'http://localhost:4000/images/default.png',
+  image: user.image || 'https://asapshop-backend.onrender.com/images/default.png',
         cartData: user.cartData,
         compras: user.compras || [],
         historico: user.historico || [],
@@ -423,7 +425,7 @@ router.put('/updateuser', fetchUser, uploadProfile.single('image'), async (req, 
     }
 
     if (req.file) {
-      updateData.image = `http://localhost:4000/images/${req.file.filename}`;
+  updateData.image = `https://asapshop-backend.onrender.com/images/${req.file.filename}`;
     }
 
     const updatedUser = await Users.findByIdAndUpdate(
@@ -446,6 +448,7 @@ router.put('/updateuser', fetchUser, uploadProfile.single('image'), async (req, 
         name: updatedUser.name,
         email: updatedUser.email,
         image: updatedUser.image || 'http://localhost:4000/images/default.png',
+  image: updatedUser.image || 'https://asapshop-backend.onrender.com/images/default.png',
         cartData: updatedUser.cartData,
         compras: updatedUser.compras || [],
         historico: updatedUser.historico || [],
