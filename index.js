@@ -14,8 +14,7 @@ const fs = require('fs');
 
 // Conexão com MongoDB
 const mongoUri =
-  process.env.MONGO_URI ||
-  'mongodb+srv://asapdev:Sam.samela321%40@cluster0.cskla.mongodb.net/loja';
+  process.env.MONGO_URI
 
 mongoose
   .connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
