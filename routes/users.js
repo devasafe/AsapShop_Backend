@@ -11,8 +11,8 @@ const multer = require('multer');
 const path = require('path');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret_ecom';
-const API_URL = process.env.API_URL || 'http://localhost:4000';
-const DEFAULT_IMAGE = 'https://i.pravatar.cc/150?u=default';
+const { BASE_URL } = require('../config');
+const { BASE_URL, DEFAULT_IMAGE } = require('../config');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -33,7 +33,7 @@ const normalizeImageURL = (imageUrl) => {
   }
   
   if (imageUrl.startsWith('/images/') || imageUrl.startsWith('images/')) {
-    return `${API_URL}/${imageUrl.replace(/^\//, '')}`;
+    return `${BASE_URL}/${imageUrl.replace(/^\//, '')}`;
   }
   
   return DEFAULT_IMAGE;
@@ -435,7 +435,8 @@ router.put('/updateuser', fetchUser, uploadProfile.single('image'), async (req, 
     }
 
     if (req.file) {
-      updateData.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+  const { BASE_URL } = require('../config');
+  updateData.image = `${BASE_URL}/images/${req.file.filename}`;
     }
 
     const updatedUser = await Users.findByIdAndUpdate(

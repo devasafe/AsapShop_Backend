@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+const { FRONTEND_URL } = require('../config');
 
 const redirectWithQuery = (dest) => (req, res) => {
   const qs = new URLSearchParams(req.query).toString();

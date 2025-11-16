@@ -29,7 +29,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // CORS
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+const { FRONTEND_URL } = require('./config');
 app.use(
   cors({
     origin: [

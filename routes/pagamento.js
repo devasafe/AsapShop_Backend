@@ -25,9 +25,10 @@ function sanitizeNotificationUrl(urlStr) {
   }
 }
 
-const RAW_BACKEND_URL = (process.env.BACKEND_PUBLIC_URL || '').replace(/\/$/, '');
+const { BASE_URL } = require('../config');
+const RAW_BACKEND_URL = BASE_URL.replace(/\/$/, '');
 const BACKEND_URL = RAW_BACKEND_URL;
-const FRONTEND_URL = (process.env.FRONTEND_URL || 'http://localhost:3000').replace(/\/$/, '');
+const { FRONTEND_URL } = require('../config');
 const notificationUrl = sanitizeNotificationUrl(BACKEND_URL ? `${BACKEND_URL}/pagamento/mp/webhook` : '');
 
 if (!notificationUrl) {

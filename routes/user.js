@@ -1,3 +1,4 @@
+const { BASE_URL } = require('../config');
 const Users = require('../models/Users');
 const fetchUser = require('../middlewares/fetchUsers');
 const router = require('express').Router();
@@ -61,7 +62,7 @@ router.post('/signup', async (req, res) => {
         name: username,
         email: emailNorm,
         password: hashed,
-  image: image || 'https://asapshop-backend.onrender.com/images/default.png',
+  image: image || `${BASE_URL}/images/default.png`,
         code,
         expiresAt
       });
@@ -118,8 +119,7 @@ router.post('/confirm', async (req, res) => {
       name: pending.name,
       email: pending.email,
       password: pending.password,
-  image: pending.image || 'https://asapshop-backend.onrender.com/images/default.png',
-  image: pending.image || 'https://asapshop-backend.onrender.com/images/default.png',
+      image: pending.image || `${BASE_URL}/images/default.png`,
       cartData: {},
       isAdmin: false
     });
@@ -191,7 +191,7 @@ router.post('/login', async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-    image: user.image || 'https://asapshop-backend.onrender.com/images/default.png'
+  image: user.image || `${BASE_URL}/images/default.png`
       }
     });
   } catch (err) {
@@ -210,8 +210,7 @@ router.post('/getuser', fetchUser, async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
-  image: user.image || 'https://asapshop-backend.onrender.com/images/default.png',
-  image: user.image || 'https://asapshop-backend.onrender.com/images/default.png',
+        image: user.image || `${BASE_URL}/images/default.png`,
         cartData: user.cartData,
         compras: user.compras || [],
         historico: user.historico || [],
@@ -425,7 +424,7 @@ router.put('/updateuser', fetchUser, uploadProfile.single('image'), async (req, 
     }
 
     if (req.file) {
-  updateData.image = `https://asapshop-backend.onrender.com/images/${req.file.filename}`;
+  updateData.image = `${BASE_URL}/images/${req.file.filename}`;
     }
 
     const updatedUser = await Users.findByIdAndUpdate(
@@ -447,8 +446,7 @@ router.put('/updateuser', fetchUser, uploadProfile.single('image'), async (req, 
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
-  image: updatedUser.image || 'https://asapshop-backend.onrender.com/images/default.png',
-  image: updatedUser.image || 'https://asapshop-backend.onrender.com/images/default.png',
+        image: updatedUser.image || `${BASE_URL}/images/default.png`,
         cartData: updatedUser.cartData,
         compras: updatedUser.compras || [],
         historico: updatedUser.historico || [],

@@ -18,8 +18,8 @@ router.post('/upload-multiple', upload.array('product_images'), (req, res) => {
     return res.status(400).json({ success: 0, error: 'Nenhuma imagem recebida' });
   }
 
-  const host = process.env.BACKEND_PUBLIC_URL || `http://localhost:4000`;
-  const urls = req.files.map(file => `${host}/images/${file.filename}`);
+  const { BASE_URL } = require('../config');
+  const urls = req.files.map(file => `${BASE_URL}/images/${file.filename}`);
 
   console.log('✅ Imagens salvas:', urls);
 

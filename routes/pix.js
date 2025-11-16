@@ -47,7 +47,7 @@ router.post('/pagar-pix', fetchUser, async (req, res) => {
       return res.status(400).json({ success: false, error: 'Nenhum item válido para criar a preferência' });
     }
 
-    const FRONTEND_URL = (process.env.FRONTEND_URL || 'http://localhost:3000').replace(/\/$/, '');
+  const { FRONTEND_URL } = require('../config');
 
     const preferenceClient = new Preference(mp);
     const pref = await preferenceClient.create({
